@@ -25,6 +25,8 @@ class MapView : FrameLayout, Map, MapsLifeCycle {
 
     private val availableService = AvailableServiceProvider.getAvailableService(context)
 
+    private var touchEventListener: ((MotionEvent?) -> Unit)? = null
+
     private val mapOperation: Map = if (availableService == AvailableService.GOOGLE) {
         GoogleMapsOperations(context)
     } else {
@@ -151,6 +153,14 @@ class MapView : FrameLayout, Map, MapsLifeCycle {
 
     override fun onLowMemory() {
         (mapOperation as MapsLifeCycle).onLowMemory()
+    }
+
+    fun setTouchEventListener(touchListener : (MotionEvent?) -> Unit) {
+        touchEventListener =  touchListener
+    }
+
+    fun clearTouchEventListener() {
+        touchEventListener = null
     }
 
     companion object {
