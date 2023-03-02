@@ -43,6 +43,7 @@ class MapView : FrameLayout, Map, MapsLifeCycle {
             MotionEvent.ACTION_UP -> parent.requestDisallowInterceptTouchEvent(false)
             MotionEvent.ACTION_DOWN -> parent.requestDisallowInterceptTouchEvent(true)
         }
+        touchEventListener?.invoke(ev)
         return super.dispatchTouchEvent(ev)
     }
 
